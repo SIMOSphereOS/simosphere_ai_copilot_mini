@@ -69,7 +69,7 @@ class Retriever:
         vec = np.asarray(model.encode([f"query: {query}"], normalize_embeddings=True), dtype="float32")
         scores, ids = self._index.search(vec, k)
         hits: list[Hit] = []
-        for idx, score in zip(ids[0], scores[0]):
+        for idx, score in zip(ids[0], scores[0], strict=False):
             if idx < 0:
                 continue
             m = self._meta[int(idx)]

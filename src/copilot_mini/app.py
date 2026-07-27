@@ -30,7 +30,6 @@ from .retrieval import Retriever
 
 _APP_ID = "simosphere_ai_copilot_mini"
 _DISPLAY = "SIMOSphere AI Copilot Mini"
-_MODEL = "intfloat/multilingual-e5-large"
 
 _STATIC = Path(__file__).resolve().parent / "static"
 
@@ -67,7 +66,11 @@ def _enabled_handler(enabled: bool, nc: NextcloudApp) -> str:
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
-    set_handlers(app, _enabled_handler, models_to_fetch={_MODEL: {}})
+    # KEIN ``models_to_fetch``: das Embedding-Modell ist bereits offline ins Image gebacken
+    # (self-contained). ``models_to_fetch`` würde beim Init einen Online-Revision-Check gegen
+    # huggingface.co erzwingen, der mit ``HF_HUB_OFFLINE=1`` fehlschlägt. Der Retriever lädt das
+    # Modell lazy aus dem Image-Cache.
+    set_handlers(app, _enabled_handler)
     yield
 
 

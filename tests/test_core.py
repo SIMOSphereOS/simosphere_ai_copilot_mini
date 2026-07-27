@@ -95,6 +95,8 @@ def test_llm_ohne_key_meldet_fehlkonfiguration():
 
 
 def test_hit_dataclass_unveraenderlich():
+    import dataclasses
+
     h = Hit(doc_id="a", title="t", text="x", source_url="u", score=0.9)
-    with pytest.raises(Exception):
+    with pytest.raises(dataclasses.FrozenInstanceError):
         h.score = 0.1  # type: ignore[misc]
