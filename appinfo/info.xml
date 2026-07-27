@@ -1,0 +1,46 @@
+<?xml version="1.0"?>
+<info xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:noNamespaceSchemaLocation="https://apps.nextcloud.com/schema/apps/info.xsd">
+    <id>simosphere_ai_copilot_mini</id>
+    <name>SIMOSphere AI Copilot Mini</name>
+    <summary>Ask your Nextcloud documentation in natural language — with sources.</summary>
+    <description><![CDATA[
+Copilot Mini is a free, open-source assistant for the **Nextcloud documentation**. It searches the
+official admin, user and developer manuals locally (a prebuilt, multilingual semantic index ships
+with the app) and lets a language model of *your* choice phrase the answer — every reply links back
+to the exact documentation page.
+
+- **Bring your own key** — OpenAI, Anthropic or a local Ollama model. Nothing is sent to any SIMO
+  server; the app is fully self-contained.
+- **Sourced answers** — every reply cites the docs.nextcloud.com page it is based on.
+- **Privacy-first** — the knowledge base ships with the app; only your question and the retrieved
+  snippets go to the LLM provider you configured.
+
+Copilot Mini is the free little sibling of **SIMOSphere AI Copilot**, which brings the same
+assistant to your own data — files, mail, ERP and more. See https://www.simo-online.com.
+
+Documentation content: Nextcloud Documentation, licensed CC BY 3.0. Not affiliated with Nextcloud GmbH.
+    ]]></description>
+    <version>0.1.0</version>
+    <licence>agpl</licence>
+    <author mail="info@simo-online.com">SIMO GmbH</author>
+    <namespace>SimosphereAiCopilotMini</namespace>
+    <category>tools</category>
+    <category>integration</category>
+    <website>https://www.simo-online.com</website>
+    <bugs>https://github.com/SIMOSphereOS/simosphere_ai_copilot_mini/issues</bugs>
+    <repository>https://github.com/SIMOSphereOS/simosphere_ai_copilot_mini</repository>
+    <dependencies>
+        <nextcloud min-version="30" max-version="33"/>
+    </dependencies>
+    <external-app>
+        <docker-install>
+            <registry>ghcr.io</registry>
+            <image>simosphereos/simosphere-ai-copilot-mini</image>
+            <image-tag>0.1.0</image-tag>
+        </docker-install>
+        <scopes>
+            <value>SETTINGS</value>
+        </scopes>
+    </external-app>
+</info>
