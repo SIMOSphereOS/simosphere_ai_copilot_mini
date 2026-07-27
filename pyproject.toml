@@ -1,6 +1,6 @@
 [project]
 name = "simosphere-ai-copilot-mini"
-version = "0.1.0"
+version = "0.1.1"
 description = "Free, self-contained Nextcloud documentation assistant (RAG) — the little sibling of SIMOSphere AI Copilot."
 requires-python = ">=3.11"
 license = { text = "AGPL-3.0-or-later" }

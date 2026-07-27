@@ -21,7 +21,7 @@ assistant to your own data — files, mail, ERP and more. See https://www.simo-o
 
 Documentation content: Nextcloud Documentation, licensed CC BY 3.0. Not affiliated with Nextcloud GmbH.
     ]]></description>
-    <version>0.1.0</version>
+    <version>0.1.1</version>
     <licence>agpl</licence>
     <author mail="info@simo-online.com">SIMO GmbH</author>
     <namespace>SimosphereAiCopilotMini</namespace>
@@ -30,6 +30,8 @@ Documentation content: Nextcloud Documentation, licensed CC BY 3.0. Not affiliat
     <website>https://www.simo-online.com</website>
     <bugs>https://github.com/SIMOSphereOS/simosphere_ai_copilot_mini/issues</bugs>
     <repository>https://github.com/SIMOSphereOS/simosphere_ai_copilot_mini</repository>
+    <screenshot>https://raw.githubusercontent.com/SIMOSphereOS/simosphere_ai_copilot_mini/main/screenshots/02-chat.png</screenshot>
+    <screenshot>https://raw.githubusercontent.com/SIMOSphereOS/simosphere_ai_copilot_mini/main/screenshots/01-configure.png</screenshot>
     <dependencies>
         <nextcloud min-version="30" max-version="33"/>
     </dependencies>
@@ -37,7 +39,7 @@ Documentation content: Nextcloud Documentation, licensed CC BY 3.0. Not affiliat
         <docker-install>
             <registry>ghcr.io</registry>
             <image>simosphereos/simosphere-ai-copilot-mini</image>
-            <image-tag>0.1.0</image-tag>
+            <image-tag>0.1.1</image-tag>
         </docker-install>
         <scopes>
             <value>SETTINGS</value>

@@ -24,6 +24,11 @@
 * {
   box-sizing: border-box;
 }
+/* Muss VOR .config/.chat display:flex greifen — sonst überschreibt display:flex das
+   UA-[hidden]{display:none}, und ein per hidden-Attribut ausgeblendetes Panel bliebe sichtbar. */
+[hidden] {
+  display: none !important;
+}
 body {
   margin: 0;
   font-family: "InterDisplay", "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
