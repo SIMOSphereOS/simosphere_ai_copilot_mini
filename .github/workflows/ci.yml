@@ -31,5 +31,12 @@ jobs:
         with:
           path: ~/.cache/huggingface
           key: hf-multilingual-e5-large-v1
+      # Modell online in den Cache holen (safetensors), BEVOR die Tests laufen — retrieval.py
+      # erzwingt zur Laufzeit HF_HUB_OFFLINE=1, findet es dann im Cache. Ab dem 2. Lauf aus dem Cache.
+      - name: Prefetch embedding model
+        run: >-
+          python -c "from huggingface_hub import snapshot_download;
+          snapshot_download('intfloat/multilingual-e5-large',
+          ignore_patterns=['*.bin','*.h5','*.onnx','*.msgpack','*.ot','tf_model*','flax_model*','rust_model*','onnx/*','openvino/*'])"
       - name: Run tests
         run: pytest -q
