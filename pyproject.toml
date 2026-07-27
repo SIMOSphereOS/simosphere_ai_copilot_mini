@@ -6,6 +6,7 @@ requires-python = ">=3.11"
 license = { text = "AGPL-3.0-or-later" }
 authors = [{ name = "SIMO GmbH" }]
 dependencies = [
+    "nc_py_api>=0.30",
     "fastapi>=0.110",
     "uvicorn[standard]>=0.29",
     "httpx>=0.27",
