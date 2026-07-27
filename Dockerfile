@@ -20,8 +20,10 @@ COPY pyproject.toml README.md ./
 COPY src/ ./src/
 RUN pip install "nc_py_api>=0.30" . && python -c "import copilot_mini; print(copilot_mini.__version__)"
 
-# Bake the embedding model into the image (network only during build).
-RUN python -c "from huggingface_hub import snapshot_download; snapshot_download('intfloat/multilingual-e5-large')"
+# Bake the embedding model into the image (network only during build). Only the safetensors
+# weights are pulled — the repo also ships PyTorch-.bin, TensorFlow-.h5 and ONNX copies (~2.2 GB
+# each) that sentence-transformers does not need; skipping them cuts the image by ~6 GB.
+RUN python -c "from huggingface_hub import snapshot_download; snapshot_download('intfloat/multilingual-e5-large', ignore_patterns=['*.bin','*.h5','*.onnx','*.msgpack','*.ot','tf_model*','flax_model*','rust_model*','onnx/*','openvino/*'])"
 
 # Prebuilt, self-contained knowledge index (CC BY 3.0 Nextcloud docs).
 COPY data/ ./data/
