@@ -1,5 +1,8 @@
 # SIMOSphere AI Copilot Mini
 
+[![CI](https://github.com/SIMOSphereOS/simosphere_ai_copilot_mini/actions/workflows/ci.yml/badge.svg)](https://github.com/SIMOSphereOS/simosphere_ai_copilot_mini/actions/workflows/ci.yml)
+[![License: AGPL v3](https://img.shields.io/badge/License-AGPL_v3-blue.svg)](LICENSE)
+
 **Ask your Nextcloud documentation in natural language — right inside Nextcloud.**
 
 Copilot Mini is a free, open-source Nextcloud app (built with AppAPI) that answers
