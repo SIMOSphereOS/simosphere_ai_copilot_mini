@@ -1,0 +1,27 @@
+SIMOSphere AI Copilot Mini
+Copyright (C) 2026 SIMO GmbH, Aschaffenburg, Germany
+
+This program is free software licensed under the GNU Affero General Public
+License v3.0 (see LICENSE).
+
+-------------------------------------------------------------------------------
+Bundled knowledge base — Nextcloud Documentation
+-------------------------------------------------------------------------------
+
+This application ships a prebuilt search index derived from the official
+Nextcloud Documentation (admin, user and developer manuals), version stable33.
+
+  Source:  https://github.com/nextcloud/documentation
+  License: Creative Commons Attribution 3.0 Unported (CC BY 3.0)
+           https://creativecommons.org/licenses/by/3.0/
+
+The documentation content is used under the terms of CC BY 3.0. The text was
+adapted for retrieval-augmented generation: each page was converted from
+reStructuredText to plain text and split into overlapping chunks. This is an
+adaptation within the meaning of section 4(b) of the license. Every answer the
+application generates cites the exact source page URL on docs.nextcloud.com,
+satisfying the attribution requirement.
+
+"Nextcloud" is a registered trademark of Nextcloud GmbH. This application is an
+independent, unofficial third-party tool and is not affiliated with, endorsed
+by, or sponsored by Nextcloud GmbH.
