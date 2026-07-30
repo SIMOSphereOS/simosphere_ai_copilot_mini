@@ -46,10 +46,13 @@ The key is stored in Nextcloud's app configuration and never logged or shared.
 
 ## Knowledge base
 
-The bundled index is derived from the official
-[Nextcloud Documentation](https://github.com/nextcloud/documentation) (stable33) under
-**CC BY 3.0** — see [`NOTICE`](NOTICE). Rebuild it for another version with
-[`tools/rst_to_md.py`](tools/rst_to_md.py) + `tools/build_index.py`.
+The bundled index (`data/nextcloud.faiss` + `data/nextcloud_meta.jsonl`) is derived from the official
+[Nextcloud Documentation](https://github.com/nextcloud/documentation) (stable33) under **CC BY 3.0** —
+see [`NOTICE`](NOTICE). It was built by converting the manuals with
+[`tools/rst_to_md.py`](tools/rst_to_md.py), chunking them, and embedding each chunk with
+`intfloat/multilingual-e5-large` into a FAISS `IndexFlatIP`. Every chunk stores its canonical
+`source_url` on `docs.nextcloud.com` — note the `user_manual` needs the `/en/` language segment
+(`…/user_manual/en/…`) while the `admin_manual` does not.
 
 ## License
 

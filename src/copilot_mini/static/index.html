@@ -7,64 +7,9 @@
     <link rel="stylesheet" href="css/style.css" />
   </head>
   <body>
-    <main id="app">
-      <header class="head">
-        <h1>Nextcloud Documentation Assistant</h1>
-        <p class="sub">Ask about administering and using Nextcloud — answers cite the docs.</p>
-      </header>
-
-      <!-- Konfigurations-Maske (nur sichtbar, solange kein LLM konfiguriert ist) -->
-      <section id="config" class="config" hidden>
-        <h2>Connect a language model</h2>
-        <p class="hint">
-          Bring your own key — nothing is sent to any SIMO server. The key is stored only in your
-          Nextcloud instance.
-        </p>
-        <label for="provider">Provider</label>
-        <select id="provider">
-          <option value="openai">OpenAI</option>
-          <option value="anthropic">Anthropic</option>
-          <option value="ollama">Ollama (local)</option>
-        </select>
-        <label for="apikey" data-for="key">API key</label>
-        <input id="apikey" type="password" autocomplete="off" placeholder="sk-…" />
-        <label for="baseurl" data-for="ollama" hidden>Ollama base URL</label>
-        <input id="baseurl" type="url" placeholder="http://localhost:11434" hidden />
-        <label for="model">Model (optional)</label>
-        <input id="model" type="text" placeholder="leave empty for default" />
-        <button id="save" type="button">Save</button>
-        <p id="config-msg" class="msg" role="status" aria-live="polite"></p>
-      </section>
-
-      <!-- Chat -->
-      <section id="chat" class="chat" hidden>
-        <div id="log" class="log" aria-live="polite"></div>
-        <form id="ask" class="ask">
-          <input
-            id="q"
-            type="text"
-            autocomplete="off"
-            placeholder="How do I put the server into maintenance mode?"
-            aria-label="Your question"
-          />
-          <button id="send" type="submit">Ask</button>
-        </form>
-        <button id="reconfigure" type="button" class="link">Change model</button>
-      </section>
-
-      <footer class="foot">
-        <p>
-          Free &amp; open source. The full <strong>SIMOSphere AI Copilot</strong> brings this
-          assistant to <em>your own</em> data — files, mail, ERP and more.
-          <a id="upgrade" href="https://www.simo-online.com" target="_blank" rel="noopener noreferrer"
-            >Learn more →</a
-          >
-        </p>
-        <p class="attr">
-          Documentation content: Nextcloud Documentation, CC BY 3.0. Not affiliated with Nextcloud GmbH.
-        </p>
-      </footer>
-    </main>
+    <!-- Das UI wird von js/main.js per DOM-API in #content aufgebaut (einzige UI-Quelle) — so ist
+         der Standalone-Modus identisch zum AppAPI-Embedded-Modus, wo Nextcloud nur #content liefert. -->
+    <div id="content"></div>
     <script src="js/main.js"></script>
   </body>
 </html>

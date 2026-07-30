@@ -1,4 +1,10 @@
 <?xml version="1.0"?>
+<!--
+  SIMOSphere AI Copilot Mini — appinfo/info.xml (Release 0.1.2)
+  <routes> ist zwingend: ohne diesen Block registriert AppAPI keine Proxy-Route
+  (oc_ex_apps_routes bleibt leer) und jeder Embedded-Zugriff endet in 404.
+  access_level-Werte: PUBLIC=0, USER=1, ADMIN=2.
+-->
 <info xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
       xsi:noNamespaceSchemaLocation="https://apps.nextcloud.com/schema/apps/info.xsd">
     <id>simosphere_ai_copilot_mini</id>
@@ -6,22 +12,77 @@
     <summary>Ask your Nextcloud documentation in natural language — with sources.</summary>
     <description><![CDATA[
 Copilot Mini is a free, open-source assistant for the **Nextcloud documentation**. It searches the
-official admin, user and developer manuals locally (a prebuilt, multilingual semantic index ships
-with the app) and lets a language model of *your* choice phrase the answer — every reply links back
-to the exact documentation page.
+official admin and user manuals locally (a prebuilt, multilingual semantic index ships with the app)
+and lets a language model of *your* choice phrase the answer — every reply links back to the exact
+documentation page.
 
-- **Bring your own key** — OpenAI, Anthropic or a local Ollama model. Nothing is sent to any SIMO
-  server; the app is fully self-contained.
-- **Sourced answers** — every reply cites the docs.nextcloud.com page it is based on.
-- **Privacy-first** — the knowledge base ships with the app; only your question and the retrieved
-  snippets go to the LLM provider you configured.
+## Requirements (please read before installing)
+This is an **External App (ExApp)**: it runs as its own container that Nextcloud starts via **AppAPI**
+and a **Deploy Daemon**. It is **not** a classic PHP app.
 
-Copilot Mini is the free little sibling of **SIMOSphere AI Copilot**, which brings the same
-assistant to your own data — files, mail, ERP and more. See https://www.simo-online.com.
+- **AppAPI** installed and enabled (bundled with Nextcloud).
+- A configured **Deploy Daemon** (Docker Socket Proxy or HaRP), set as the *default* daemon.
+  On **Nextcloud All-in-One** this is usually preconfigured; on manual Docker installs an administrator
+  must set it up once (see the AppAPI admin settings). Without it, "Deploy and Enable" shows
+  *"Deploy daemon is not accessible"*.
+- Outbound access to **ghcr.io** to pull the app image, and — for cloud models — HTTPS access to your
+  LLM provider.
+- A **language model (bring your own)**: an **OpenAI** or **Anthropic** API key, **or** a reachable
+  **Ollama** instance with a pulled model (e.g. `ollama pull qwen2.5:3b`).
+
+## Installation
+1. Make sure a default Deploy Daemon is configured (see Requirements).
+2. Open **Settings → Apps → Tools**, find *SIMOSphere AI Copilot Mini* and click **Deploy and Enable**.
+3. Approve the requested scope (`SETTINGS`) and wait for the container to start (1–2 min on first run).
+4. Open the app from the top bar and connect your model:
+   - *OpenAI/Anthropic*: paste your API key.
+   - *Ollama*: set the base URL (e.g. `http://host.docker.internal:11434`) and model name.
+
+## Privacy
+Bring your own key — nothing is sent to any SIMO server. Your key is stored only in your Nextcloud
+instance; only your question and the retrieved documentation snippets go to the LLM provider you
+configured.
 
 Documentation content: Nextcloud Documentation, licensed CC BY 3.0. Not affiliated with Nextcloud GmbH.
     ]]></description>
-    <version>0.1.1</version>
+    <description lang="de"><![CDATA[
+Copilot Mini ist ein kostenloser, quelloffener Assistent für die **Nextcloud-Dokumentation**. Er
+durchsucht die offiziellen Admin- und Benutzerhandbücher lokal (ein vorgefertigter, mehrsprachiger
+semantischer Index ist enthalten) und lässt ein Sprachmodell *Ihrer* Wahl die Antwort formulieren —
+jede Antwort verlinkt die passende Dokumentationsseite.
+
+## Voraussetzungen (bitte vor der Installation lesen)
+Dies ist eine **External App (ExApp)**: Sie läuft als eigener Container, den Nextcloud über die
+**AppAPI** und einen **Deploy-Daemon** startet. Es ist **kein** klassisches PHP-App.
+
+- **AppAPI** installiert und aktiviert (in Nextcloud enthalten).
+- Ein konfigurierter **Deploy-Daemon** (Docker Socket Proxy oder HaRP), als *Standard* gesetzt.
+  Bei **Nextcloud All-in-One** meist vorkonfiguriert; bei manuellen Docker-Installationen muss ihn
+  ein:e Administrator:in einmalig einrichten (siehe AppAPI-Verwaltungseinstellungen). Ohne ihn zeigt
+  "Herunterladen und aktivieren" die Meldung *"Deploy daemon is not accessible"*.
+- Ausgehender Zugriff auf **ghcr.io** zum Laden des App-Images sowie — bei Cloud-Modellen — HTTPS zum
+  LLM-Anbieter.
+- Ein **Sprachmodell (selbst mitgebracht)**: ein **OpenAI**- oder **Anthropic**-API-Key **oder** eine
+  erreichbare **Ollama**-Instanz mit geladenem Modell (z. B. `ollama pull qwen2.5:3b`).
+
+## Installation
+1. Sicherstellen, dass ein Standard-Deploy-Daemon konfiguriert ist (siehe Voraussetzungen).
+2. **Einstellungen → Apps → Tools** öffnen, *SIMOSphere AI Copilot Mini* wählen und **Herunterladen und
+   aktivieren** klicken.
+3. Angeforderten Scope (`SETTINGS`) bestätigen und warten, bis der Container gestartet ist (beim ersten
+   Mal 1–2 Min).
+4. App über die obere Leiste öffnen und Modell verbinden:
+   - *OpenAI/Anthropic*: API-Key einfügen.
+   - *Ollama*: Base-URL (z. B. `http://host.docker.internal:11434`) und Modellnamen eintragen.
+
+## Datenschutz
+Eigener Schlüssel — nichts wird an einen SIMO-Server gesendet. Der Schlüssel wird ausschließlich in
+Ihrer Nextcloud gespeichert; nur Ihre Frage und die gefundenen Doku-Ausschnitte gehen an den von Ihnen
+konfigurierten LLM-Anbieter.
+
+Dokumentationsinhalte: Nextcloud Documentation, Lizenz CC BY 3.0. Nicht mit der Nextcloud GmbH verbunden.
+    ]]></description>
+    <version>0.1.2</version>
     <licence>agpl</licence>
     <author mail="info@simo-online.com">SIMO GmbH</author>
     <namespace>SimosphereAiCopilotMini</namespace>
@@ -33,14 +94,34 @@ Documentation content: Nextcloud Documentation, licensed CC BY 3.0. Not affiliat
     <screenshot>https://raw.githubusercontent.com/SIMOSphereOS/simosphere_ai_copilot_mini/main/screenshots/02-chat.png</screenshot>
     <screenshot>https://raw.githubusercontent.com/SIMOSphereOS/simosphere_ai_copilot_mini/main/screenshots/01-configure.png</screenshot>
     <dependencies>
-        <nextcloud min-version="30" max-version="33"/>
+        <nextcloud min-version="30" max-version="34"/>
     </dependencies>
     <external-app>
         <docker-install>
             <registry>ghcr.io</registry>
             <image>simosphereos/simosphere-ai-copilot-mini</image>
-            <image-tag>0.1.1</image-tag>
+            <image-tag>0.1.2</image-tag>
         </docker-install>
+        <routes>
+            <route>
+                <url>^/$</url>
+                <verb>GET</verb>
+                <access_level>USER</access_level>
+                <headers_to_exclude>[]</headers_to_exclude>
+            </route>
+            <route>
+                <url>^/(js|css|img)/.*</url>
+                <verb>GET</verb>
+                <access_level>USER</access_level>
+                <headers_to_exclude>[]</headers_to_exclude>
+            </route>
+            <route>
+                <url>^/api/.*</url>
+                <verb>GET,POST</verb>
+                <access_level>USER</access_level>
+                <headers_to_exclude>[]</headers_to_exclude>
+            </route>
+        </routes>
         <scopes>
             <value>SETTINGS</value>
         </scopes>
