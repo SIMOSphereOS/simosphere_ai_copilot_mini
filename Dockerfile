@@ -18,7 +18,9 @@ RUN pip install torch --index-url https://download.pytorch.org/whl/cpu
 # Python deps from the project metadata.
 COPY pyproject.toml README.md ./
 COPY src/ ./src/
-RUN pip install "nc_py_api>=0.30" . && python -c "import copilot_mini; print(copilot_mini.__version__)"
+RUN pip install "nc_py_api>=0.30" . \
+ && python -c "import copilot_mini; print(copilot_mini.__version__)" \
+ && python -c "import copilot_mini, pathlib; p=pathlib.Path(copilot_mini.__file__).parent/'static'/'js'/'main.js'; assert p.is_file(), 'FIX #2 regression: static/ not bundled into the installed package: %s' % p; print('static bundled OK:', p)"
 
 # Bake the embedding model into the image (network only during build). Only the safetensors
 # weights are pulled — the repo also ships PyTorch-.bin, TensorFlow-.h5 and ONNX copies (~2.2 GB

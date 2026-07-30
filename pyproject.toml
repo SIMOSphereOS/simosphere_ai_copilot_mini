@@ -1,6 +1,6 @@
 [project]
 name = "simosphere-ai-copilot-mini"
-version = "0.1.1"
+version = "0.1.2"
 description = "Free, self-contained Nextcloud documentation assistant (RAG) — the little sibling of SIMOSphere AI Copilot."
 requires-python = ">=3.11"
 license = { text = "AGPL-3.0-or-later" }
@@ -24,6 +24,13 @@ build-backend = "setuptools.build_meta"
 
 [tool.setuptools.packages.find]
 where = ["src"]
+
+# Das Frontend (static/) MUSS mit ins installierte Paket — sonst ist site-packages/copilot_mini/static
+# nicht vorhanden, der ``if _STATIC.is_dir()``-Guard in app.py bleibt False und die App liefert ihre
+# eigenen Assets als 404. (data/ liegt ausserhalb des Pakets und wird im Image separat nach /app/data
+# kopiert, siehe Dockerfile + COPILOT_MINI_DATA.)
+[tool.setuptools.package-data]
+copilot_mini = ["static/**/*"]
 
 [tool.pytest.ini_options]
 asyncio_mode = "auto"
