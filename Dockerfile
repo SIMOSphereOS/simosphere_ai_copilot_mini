@@ -1,7 +1,7 @@
 # SIMOSphere AI Copilot Mini — self-contained ExApp image.
 # Bakes the embedding model (e5-large, CPU) AND the prebuilt Nextcloud-docs index into the image,
 # so the app runs fully offline: the only outbound call at runtime is to the user's chosen LLM.
-FROM python:3.12-slim-bookworm
+FROM python:3.15-slim-bookworm
 
 ENV PYTHONUNBUFFERED=1 \
     PIP_NO_CACHE_DIR=1 \
